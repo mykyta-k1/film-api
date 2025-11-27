@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Film Information</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f5f5f5;">
+<table role="presentation" style="width: 100%; border-collapse: collapse;">
+  <tr>
+    <td style="padding: 20px 0;">
+      <table role="presentation"
+             style="width: 650px; margin: 0 auto; background-color: #ffffff; border-collapse: collapse; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+
+        <!-- Header Section -->
+        <tr>
+          <td style="padding: 40px 30px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); text-align: center;">
+            <h1 style="margin: 0; color: #ffffff; font-size: 32px; font-weight: bold;">
+              <span th:text="${film.title}">Film Title</span>
+            </h1>
+            <p style="margin: 10px 0 0 0; color: #ffffff; font-size: 16px; opacity: 0.9;">
+              <span th:text="${film.year}">Year</span>
+              <span th:if="${film.rated != null and film.rated != 'N/A'}">
+                                    • <span th:text="${film.rated}">Rating</span>
+                                </span>
+              <span th:if="${film.runtime != null and film.runtime != 'N/A'}">
+                                    • <span th:text="${film.runtime}">Runtime</span>
+                                </span>
+            </p>
+          </td>
+        </tr>
+
+        <!-- Main Content Section -->
+        <tr>
+          <td style="padding: 30px;">
+            <table role="presentation" style="width: 100%; border-collapse: collapse;">
+              <tr>
+                <!-- Poster Column -->
+                <td style="width: 200px; vertical-align: top; padding-right: 20px;"
+                    th:if="${film.poster != null and film.poster != 'N/A'}">
+                  <img alt="Film Poster"
+                       style="width: 200px; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);"
+                       th:src="${film.poster}">
+                </td>
+
+                <!-- Information Column -->
+                <td style="vertical-align: top;">
+                  <!-- IMDB Rating -->
+                  <div
+                      style="margin-bottom: 20px; padding: 15px; background-color: #fff3cd; border-left: 4px solid #ffc107; border-radius: 4px;"
+                      th:if="${film.imdbRating != null and film.imdbRating != 'N/A'}">
+                    <p style="margin: 0; font-size: 14px; color: #856404;">
+                      <strong style="font-size: 24px; color: #000000;">★ <span
+                          th:text="${film.imdbRating}">8.5</span></strong>
+                      <span style="font-size: 14px; color: #666666;">/10</span>
+                      <span th:if="${film.imdbVotes != null and film.imdbVotes != 'N/A'}">
+                                                    (<span th:text="${film.imdbVotes}">votes</span> votes)
+                                                </span>
+                    </p>
+                  </div>
+
+                  <!-- Genre -->
+                  <div style="margin-bottom: 15px;"
+                       th:if="${film.genre != null and film.genre != 'N/A'}">
+                    <p style="margin: 0 0 5px 0; font-size: 12px; color: #999999; text-transform: uppercase; letter-spacing: 1px;">
+                      Genre
+                    </p>
+                    <p style="margin: 0; font-size: 16px; color: #333333;" th:text="${film.genre}">
+                      Action, Drama
+                    </p>
+                  </div>
+
+                  <!-- Director -->
+                  <div style="margin-bottom: 15px;"
+                       th:if="${film.director != null and film.director != 'N/A'}">
+                    <p style="margin: 0 0 5px 0; font-size: 12px; color: #999999; text-transform: uppercase; letter-spacing: 1px;">
+                      Director
+                    </p>
+                    <p style="margin: 0; font-size: 16px; color: #333333;"
+                       th:text="${film.director}">
+                      Director Name
+                    </p>
+                  </div>
+
+                  <!-- Actors -->
+                  <div style="margin-bottom: 15px;"
+                       th:if="${film.actors != null and film.actors != 'N/A'}">
+                    <p style="margin: 0 0 5px 0; font-size: 12px; color: #999999; text-transform: uppercase; letter-spacing: 1px;">
+                      Cast
+                    </p>
+                    <p style="margin: 0; font-size: 16px; color: #333333;" th:text="${film.actors}">
+                      Actor Names
+                    </p>
+                  </div>
+                </td>
+              </tr>
+            </table>
+
+            <!-- Plot Section -->
+            <div
+                style="margin-top: 25px; padding: 20px; background-color: #f8f9fa; border-radius: 8px;"
+                th:if="${film.plot != null and film.plot != 'N/A'}">
+              <p style="margin: 0 0 10px 0; font-size: 12px; color: #999999; text-transform: uppercase; letter-spacing: 1px;">
+                Plot
+              </p>
+              <p style="margin: 0; font-size: 15px; line-height: 1.7; color: #333333;"
+                 th:text="${film.plot}">
+                Film plot description
+              </p>
+            </div>
+
+            <!-- Additional Details -->
+            <table role="presentation"
+                   style="width: 100%; border-collapse: collapse; margin-top: 25px;">
+              <tr th:if="${film.released != null and film.released != 'N/A'}">
+                <td style="padding: 10px 0; border-top: 1px solid #e0e0e0;">
+                  <span style="font-size: 14px; color: #666666;">Released:</span>
+                </td>
+                <td style="padding: 10px 0; border-top: 1px solid #e0e0e0; text-align: right;">
+                  <span style="font-size: 14px; color: #333333; font-weight: 500;"
+                        th:text="${film.released}">Date</span>
+                </td>
+              </tr>
+              <tr th:if="${film.language != null and film.language != 'N/A'}">
+                <td style="padding: 10px 0; border-top: 1px solid #e0e0e0;">
+                  <span style="font-size: 14px; color: #666666;">Language:</span>
+                </td>
+                <td style="padding: 10px 0; border-top: 1px solid #e0e0e0; text-align: right;">
+                  <span style="font-size: 14px; color: #333333; font-weight: 500;"
+                        th:text="${film.language}">Language</span>
+                </td>
+              </tr>
+              <tr th:if="${film.country != null and film.country != 'N/A'}">
+                <td style="padding: 10px 0; border-top: 1px solid #e0e0e0;">
+                  <span style="font-size: 14px; color: #666666;">Country:</span>
+                </td>
+                <td style="padding: 10px 0; border-top: 1px solid #e0e0e0; text-align: right;">
+                  <span style="font-size: 14px; color: #333333; font-weight: 500;"
+                        th:text="${film.country}">Country</span>
+                </td>
+              </tr>
+              <tr th:if="${film.boxOffice != null and film.boxOffice != 'N/A'}">
+                <td style="padding: 10px 0; border-top: 1px solid #e0e0e0;">
+                  <span style="font-size: 14px; color: #666666;">Box Office:</span>
+                </td>
+                <td style="padding: 10px 0; border-top: 1px solid #e0e0e0; text-align: right;">
+                  <span style="font-size: 14px; color: #333333; font-weight: 500;"
+                        th:text="${film.boxOffice}">Amount</span>
+                </td>
+              </tr>
+              <tr th:if="${film.awards != null and film.awards != 'N/A'}">
+                <td style="padding: 10px 0; border-top: 1px solid #e0e0e0;">
+                  <span style="font-size: 14px; color: #666666;">Awards:</span>
+                </td>
+                <td style="padding: 10px 0; border-top: 1px solid #e0e0e0; text-align: right;">
+                  <span style="font-size: 14px; color: #333333; font-weight: 500;"
+                        th:text="${film.awards}">Awards</span>
+                </td>
+              </tr>
+            </table>
+
+            <!-- Ratings Section -->
+            <div style="margin-top: 30px;"
+                 th:if="${film.ratings != null and !film.ratings.isEmpty()}">
+              <p style="margin: 0 0 15px 0; font-size: 18px; color: #333333; font-weight: bold;">
+                Ratings
+              </p>
+              <table role="presentation" style="width: 100%; border-collapse: collapse;">
+                <tr th:each="rating : ${film.ratings}">
+                  <td style="padding: 12px 15px; background-color: #f8f9fa; border-radius: 6px; margin-bottom: 8px;">
+                    <table role="presentation" style="width: 100%; border-collapse: collapse;">
+                      <tr>
+                        <td style="width: 70%;">
+                          <span style="font-size: 14px; color: #333333; font-weight: 500;"
+                                th:text="${rating.source}">Source</span>
+                        </td>
+                        <td style="width: 30%; text-align: right;">
+                          <span style="font-size: 16px; color: #667eea; font-weight: bold;"
+                                th:text="${rating.value}">Value</span>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </td>
+        </tr>
+
+        <!-- Footer Section -->
+        <tr>
+          <td style="padding: 30px; background-color: #f8f9fa; text-align: center; border-top: 1px solid #e0e0e0;">
+            <p style="margin: 0; font-size: 14px; color: #666666;">
+              This email contains information about the film you requested.
+            </p>
+            <p style="margin: 10px 0 0 0; font-size: 12px; color: #999999;">
+              Film API Service
+            </p>
+          </td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>
