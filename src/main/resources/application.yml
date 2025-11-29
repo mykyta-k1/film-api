@@ -2,6 +2,8 @@ api:
   base-url: ${BASE_API_URL}
   key: ${API_KEY}
   origin: ${ALLOWED_ORIGIN}
+  mail:
+    from: ${MAIL_USERNAME}
 spring:
   mail:
     host: smtp.gmail.com
@@ -18,4 +20,3 @@ spring:
           connectiontimeout: 5000
           timeout: 5000
           writetimeout: 5000
-
